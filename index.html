@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-white antialiased">
+
+    <!-- Main Container -->
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
+
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-white">Subscription Manager</h1>
+            <p class="text-gray-400 mt-2">Keep track of your recurring subscriptions with ease.</p>
+        </header>
+
+        <!-- Summary Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col justify-center items-center">
+                <h2 class="text-lg font-medium text-gray-400">Total Subscriptions</h2>
+                <p id="total-subscriptions" class="text-3xl font-bold text-white mt-2">0</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col justify-center items-center">
+                <h2 class="text-lg font-medium text-gray-400">Monthly Cost</h2>
+                <p id="total-monthly-cost" class="text-3xl font-bold text-green-400 mt-2">₹0.00</p>
+            </div>
+             <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col justify-center items-center">
+                <h2 class="text-lg font-medium text-gray-400">Yearly Cost</h2>
+                <p id="total-yearly-cost" class="text-3xl font-bold text-blue-400 mt-2">₹0.00</p>
+            </div>
+        </div>
+
+        <!-- Add Subscription Form -->
+        <div class="bg-gray-800 p-8 rounded-xl shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-white">Add New Subscription</h2>
+            <form id="add-subscription-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="service-select" class="block text-sm font-medium text-gray-300 mb-2">Service Name</label>
+                    <select id="service-select" name="service-select" required class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        <option value="Netflix">Netflix</option>
+                        <option value="Amazon Prime Video">Amazon Prime Video</option>
+                        <option value="Disney+ Hotstar">Disney+ Hotstar</option>
+                        <option value="SonyLIV">SonyLIV</option>
+                        <option value="ZEE5">ZEE5</option>
+                        <option value="JioCinema">JioCinema</option>
+                        <option value="MX Player">MX Player</option>
+                        <option value="Voot">Voot</option>
+                        <option value="ALTBalaji">ALTBalaji</option>
+                        <option value="Eros Now">Eros Now</option>
+                        <option value="Sun NXT">Sun NXT</option>
+                        <option value="Planet Marathi">Planet Marathi</option>
+                        <option value="Saina Play">Saina Play</option>
+                        <option value="YouTube Premium">YouTube Premium</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div id="other-service-container" class="hidden">
+                    <label for="other-service-name" class="block text-sm font-medium text-gray-300 mb-2">Custom Service Name</label>
+                    <input type="text" id="other-service-name" name="other-service-name" class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                </div>
+                <div>
+                    <label for="price" class="block text-sm font-medium text-gray-300 mb-2">Price</label>
+                    <input type="number" id="price" name="price" min="0" step="0.01" required class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                </div>
+                <div>
+                    <label for="billing-cycle" class="block text-sm font-medium text-gray-300 mb-2">Billing Cycle</label>
+                    <select id="billing-cycle" name="billing-cycle" required class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="next-billing-date" class="block text-sm font-medium text-gray-300 mb-2">Next Billing Date</label>
+                    <input type="date" id="next-billing-date" name="next-billing-date" required class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                </div>
+                 <div class="md:col-span-2">
+                    <label for="category" class="block text-sm font-medium text-gray-300 mb-2">Category</label>
+                    <input type="text" id="category" name="category" placeholder="e.g., Entertainment, Work" class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                </div>
+                <div class="md:col-span-2 text-right">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500">
+                        Add Subscription
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Subscriptions List -->
+        <div>
+            <h2 class="text-2xl font-bold mb-4 text-white">Your Subscriptions</h2>
+            <div id="subscriptions-list" class="space-y-4">
+                <!-- Subscription items will be injected here by JavaScript -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 z-50 items-center justify-center hidden modal-backdrop">
+        <div class="bg-gray-800 w-full max-w-lg p-8 rounded-xl shadow-2xl m-4">
+            <h2 class="text-2xl font-bold mb-6 text-white">Edit Subscription</h2>
+            <form id="edit-subscription-form">
+                <input type="hidden" id="edit-index">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="edit-service-select" class="block text-sm font-medium text-gray-300 mb-2">Service Name</label>
+                        <select id="edit-service-select" required class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                            <option value="Netflix">Netflix</option>
+                            <option value="Amazon Prime Video">Amazon Prime Video</option>
+                            <option value="Disney+ Hotstar">Disney+ Hotstar</option>
+                            <option value="SonyLIV">SonyLIV</option>
+                            <option value="ZEE5">ZEE5</option>
+                            <option value="JioCinema">JioCinema</option>
+                            <option value="MX Player">MX Player</option>
+                            <option value="Voot">Voot</option>
+                            <option value="ALTBalaji">ALTBalaji</option>
+                            <option value="Eros Now">Eros Now</option>
+                            <option value="Sun NXT">Sun NXT</option>
+                            <option value="Planet Marathi">Planet Marathi</option>
+                            <option value="Saina Play">Saina Play</option>
+                            <option value="YouTube Premium">YouTube Premium</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                     <div id="edit-other-service-container" class="hidden">
+                        <label for="edit-other-service-name" class="block text-sm font-medium text-gray-300 mb-2">Custom Service Name</label>
+                        <input type="text" id="edit-other-service-name" class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                    <div>
+                        <label for="edit-price" class="block text-sm font-medium text-gray-300 mb-2">Price</label>
+                        <input type="number" id="edit-price" min="0" step="0.01" required class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                    <div>
+                        <label for="edit-billing-cycle" class="block text-sm font-medium text-gray-300 mb-2">Billing Cycle</label>
+                        <select id="edit-billing-cycle" required class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                           <option value="monthly">Monthly</option>
+                           <option value="yearly">Yearly</option>
+                           <option value="quarterly">Quarterly</option>
+                           <option value="weekly">Weekly</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="edit-next-billing-date" class="block text-sm font-medium text-gray-300 mb-2">Next Billing Date</label>
+                        <input type="date" id="edit-next-billing-date" required class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                     <div class="md:col-span-2">
+                        <label for="edit-category" class="block text-sm font-medium text-gray-300 mb-2">Category</label>
+                        <input type="text" id="edit-category" placeholder="e.g., Entertainment, Work" class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-end space-x-4">
+                    <button type="button" id="cancel-edit" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition">Cancel</button>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
